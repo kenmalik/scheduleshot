@@ -4,6 +4,8 @@ import "./App.css";
 let nextId = 1;
 
 function App() {
+  const [dialogOpen, setDialogOpen] = useState(false);
+
   const [rows, setRows] = useState([
     { id: nextId - 1, class: "Sample Class", time: "08:00" },
   ]);
@@ -42,7 +44,7 @@ function App() {
 
   function handleViewSchedule(e) {
     e.preventDefault();
-    console.log(e);
+    setDialogOpen(true);
   }
 
   return (
@@ -51,27 +53,49 @@ function App() {
         <button type="submit" className="control">
           View Schedule
         </button>
-        <div id="list">{rows.map((row, i) => (
-          <div key={`row-${i}`} className="row">
-            <input
-              type="text"
-              value={row.class}
-              onChange={(e) => handleEditRow(row.id, e)}
-            />
-            <input
-              type="time"
-              value={row.time}
-              onChange={(e) => handleEditTime(row.id, e)}
-            />
-            <button type="button" onClick={() => handleDeleteRow(row.id)}>
-              Delete
-            </button>
-          </div>
-        ))}</div>
+        <div id="list">
+          {rows.map((row) => (
+            <div key={`row-${row.id}`} className="row">
+              <input
+                type="text"
+                value={row.class}
+                onChange={(e) => handleEditRow(row.id, e)}
+                className="class-input"
+              />
+              <input
+                type="time"
+                value={row.time}
+                onChange={(e) => handleEditTime(row.id, e)}
+              />
+              <button type="button" onClick={() => handleDeleteRow(row.id)}>
+                Delete
+              </button>
+            </div>
+          ))}
+        </div>
         <button type="button" className="control" onClick={handleNewRow}>
           + Add row
         </button>
       </form>
+      <dialog
+        id="schedule-dialog"
+        open={dialogOpen}
+        onClick={() => setDialogOpen(false)}
+      >
+        <div id="schedule">
+          <div>
+            {rows.map(
+              (row) =>
+                !(row.time === "" && row.class === "") && (
+                  <div className="schedule-row">
+                    <div>{row.class}</div>
+                    <div>{row.time}</div>
+                  </div>
+                ),
+            )}
+          </div>
+        </div>
+      </dialog>
     </>
   );
 }
