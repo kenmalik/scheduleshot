@@ -1,3 +1,19 @@
-.block {
+#list {
+  height: 50vh;
+  border: 1px solid black;
+  padding: 1em;
+  margin: 1em 0;
+  overflow: scroll;
+}
+
+.control {
   display: block;
+  width: 100%;
+  padding: .5em;
+}
+
+.row {
+  display: flex;
+  gap: 0.5em;
+  margin-bottom: 0.2em;
 }

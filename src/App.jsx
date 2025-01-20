@@ -48,11 +48,11 @@ function App() {
   return (
     <>
       <form onSubmit={handleViewSchedule}>
-        <button type="submit" className="block">
+        <button type="submit" className="control">
           View Schedule
         </button>
-        {rows.map((row, i) => (
-          <div key={`row-${i}`}>
+        <div id="list">{rows.map((row, i) => (
+          <div key={`row-${i}`} className="row">
             <input
               type="text"
               value={row.class}
@@ -67,8 +67,8 @@ function App() {
               Delete
             </button>
           </div>
-        ))}
-        <button type="button" className="block" onClick={handleNewRow}>
+        ))}</div>
+        <button type="button" className="control" onClick={handleNewRow}>
           + Add row
         </button>
       </form>
