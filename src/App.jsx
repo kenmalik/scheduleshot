@@ -62,14 +62,14 @@ function App() {
                 onChange={(e) => handleEditRow(row.id, e)}
                 className="class-input"
               />
-              <input
+              <div><input
                 type="time"
                 value={row.time}
                 onChange={(e) => handleEditTime(row.id, e)}
               />
               <button type="button" onClick={() => handleDeleteRow(row.id)}>
                 Delete
-              </button>
+              </button></div>
             </div>
           ))}
         </div>
